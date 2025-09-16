@@ -31,5 +31,24 @@ public class ClienteService {
         clienteRepository.deleteById(id);
     }
 
+    public Optional<ClienteModel> atualizarCliente(ClienteModel cliente, Long id) {
+        Optional<ClienteModel> clienteExistente = clienteRepository.findById(id);
+        if(clienteExistente.isPresent()){
+            ClienteModel clienteEncontrado = clienteExistente.get();
+            clienteEncontrado.setNome(cliente.getNome());
+            clienteEncontrado.setEmail(cliente.getEmail());
+            ClienteModel clienteAtualizado = clienteRepository.save(clienteEncontrado);
+            return Optional.of(clienteAtualizado);
+
+        } else {
+            return Optional.empty();
+        }
+
+
+    }
+
+    public ClienteModel criarCliente (ClienteModel cliente){
+        return clienteRepository.save(cliente);
+    }
 
 }
