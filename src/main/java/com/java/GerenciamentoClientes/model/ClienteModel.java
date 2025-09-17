@@ -22,7 +22,6 @@ public class ClienteModel {
     private String nome;
     @NotBlank (message = "O email é obrigatorio")
     private String email;
-    @NotNull
     private int idade;
 
 }
