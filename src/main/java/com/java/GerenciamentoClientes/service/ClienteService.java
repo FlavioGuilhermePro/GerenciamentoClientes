@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {
@@ -24,21 +25,31 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
-    public List<ClienteModel> listarClientes(){
-        return clienteRepository.findAll();
+    public List<ClienteDTO> listarClientes() {
+        return clienteRepository.findAll().stream()
+                .map(cliente -> {
+                    ClienteDTO dto = new ClienteDTO();
+                    dto.setNome(cliente.getNome());
+                    dto.setEmail(cliente.getEmail());
+                    dto.setIdade(cliente.getIdade());
+                    return dto;
+                })
+                .collect(Collectors.toList());
     }
 
-    public Optional<ClienteModel> listarClienteId(Long id){
-        return clienteRepository.findById(id);
+    public Optional<ClienteDTO> listarClienteId(Long id){
+        return clienteRepository.findById(id)
+                .map(cliente -> {
+                    ClienteDTO dto = new ClienteDTO();
+                    dto.setNome(cliente.getNome());
+                    dto.setEmail(cliente.getEmail());
+                    dto.setIdade(cliente.getIdade());
+                    return dto;
+                });
     }
 
     public void deletarCliente(Long id){
         clienteRepository.deleteById(id);
-    }
-
-
-    public ClienteModel criarCliente (ClienteModel cliente){
-        return clienteRepository.save(cliente);
     }
 
     public Optional<ClienteModel> atualizarCliente(Long id ,ClienteModel cliente){
