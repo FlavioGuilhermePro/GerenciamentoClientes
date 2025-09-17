@@ -1,10 +1,9 @@
 package com.java.GerenciamentoClientes.service;
 
+import com.java.GerenciamentoClientes.dto.ClienteDTO;
 import com.java.GerenciamentoClientes.model.ClienteModel;
 import com.java.GerenciamentoClientes.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +16,11 @@ public class ClienteService {
         this.clienteRepository = clienteRepository;
     }
 
-    public ClienteModel salvarCliente (ClienteModel cliente){
+    public ClienteModel criarCliente(ClienteDTO clienteDTO){
+        ClienteModel cliente = new ClienteModel();
+        cliente.setNome(clienteDTO.getNome());
+        cliente.setEmail(clienteDTO.getEmail());
+        cliente.setIdade(clienteDTO.getIdade());
         return clienteRepository.save(cliente);
     }
 
