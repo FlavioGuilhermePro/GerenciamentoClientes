@@ -3,6 +3,8 @@ package com.java.GerenciamentoClientes.service;
 import com.java.GerenciamentoClientes.model.ClienteModel;
 import com.java.GerenciamentoClientes.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,6 +51,21 @@ public class ClienteService {
 
     public ClienteModel criarCliente (ClienteModel cliente){
         return clienteRepository.save(cliente);
+    }
+
+    public Optional<ClienteModel> atualizarCliente(Long id ,ClienteModel cliente){
+        Optional<ClienteModel> clienteOptional = clienteRepository.findById(id);
+        if(clienteOptional.isPresent()){
+            ClienteModel clienteExistente = clienteOptional.get();
+            clienteExistente.setNome(cliente.getNome());
+            clienteExistente.setEmail(cliente.getEmail());
+            clienteExistente.setIdade(cliente.getIdade());
+
+            ClienteModel clienteAtualizado = clienteRepository.save(clienteExistente);
+            return Optional.of(clienteAtualizado);
+        } else {
+            return Optional.empty();
+        }
     }
 
 }

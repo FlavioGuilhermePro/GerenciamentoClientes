@@ -34,8 +34,9 @@ public class ClienteController {
     public void deletarCliente(@PathVariable Long id){
         clienteService.deletarCliente(id);
     }
+    @PutMapping ("/atualizar/{id}")
     public Optional<ClienteModel> atualizarCliente(@PathVariable Long id, @RequestBody ClienteModel cliente){
-        return null;
+        return clienteService.atualizarCliente(id,cliente);
     }
 
 
