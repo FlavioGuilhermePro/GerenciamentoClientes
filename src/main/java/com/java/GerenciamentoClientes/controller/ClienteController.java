@@ -28,7 +28,7 @@ public class ClienteController {
     }
 
     @PostMapping("/criar")
-    public ClienteModel criarCliente (@RequestBody ClienteModel cliente){
+    public ClienteModel criarCliente (@RequestBody ClienteDTO cliente){
         return clienteService.criarCliente(cliente);
     }
     @DeleteMapping("/deletar/{id}")
@@ -36,7 +36,7 @@ public class ClienteController {
         clienteService.deletarCliente(id);
     }
     @PutMapping ("/atualizar/{id}")
-    public Optional<ClienteModel> atualizarCliente(@PathVariable Long id, @RequestBody ClienteModel cliente){
+    public Optional<ClienteModel> atualizarCliente(@PathVariable Long id, @RequestBody ClienteDTO cliente){
         return clienteService.atualizarCliente(id,cliente);
     }
 

@@ -52,7 +52,7 @@ public class ClienteService {
         clienteRepository.deleteById(id);
     }
 
-    public Optional<ClienteModel> atualizarCliente(Long id ,ClienteModel cliente){
+    public Optional<ClienteModel> atualizarCliente(Long id ,ClienteDTO cliente){
         Optional<ClienteModel> clienteOptional = clienteRepository.findById(id);
         if(clienteOptional.isPresent()){
             ClienteModel clienteExistente = clienteOptional.get();

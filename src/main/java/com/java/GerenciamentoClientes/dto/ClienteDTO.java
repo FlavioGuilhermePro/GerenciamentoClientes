@@ -10,5 +10,4 @@ public class ClienteDTO {
     @NotBlank
     private String email;
     private int idade;
-
 }
